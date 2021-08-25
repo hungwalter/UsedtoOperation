@@ -73,6 +73,17 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: 在此經由修改 CREATESTRUCT cs 
 	// 達到修改視窗類別或樣式的目的
+	int xSize = ::GetSystemMetrics(SM_CXSCREEN);
+	int ySize = ::GetSystemMetrics(SM_CYSCREEN);
+	cs.cx = xSize * 2 / 3;
+	cs.cy = ySize * 2 / 3;
+	cs.x = (xSize - cs.cx) / 2;
+	cs.y = (ySize - cs.cy) / 2;
+
+	cs.style &= ~(WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
+	cs.style &= ~WS_THICKFRAME;
+	cs.style &= ~FWS_ADDTOTITLE;
+	m_strTitle = "My Program";
 
 	return TRUE;
 }
